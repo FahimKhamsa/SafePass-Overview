@@ -29,12 +29,12 @@ export default function FrontendOverviewPage() {
           <h1 className="text-4xl font-bold text-dark-jungle-green mb-4">
             SafePass Frontend Demo
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            This is a frontend overview of the SafePass platform. Since
-            there&apos;s no backend connected, you can explore the interface as
-            either a Worker or an Agency to see the full functionality with
-            dummy data.
-          </p>
+          <div className="mt-8 text-center">
+            <div className="inline-flex items-center px-4 py-2 bg-amber-50 border border-amber-200 rounded-lg">
+              <div className="w-2 h-2 bg-amber-400 rounded-full mr-2"></div>
+              <span className="text-sm text-amber-800">Demo Mode</span>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -79,7 +79,9 @@ export default function FrontendOverviewPage() {
                 Agency Portal
               </CardTitle>
               <CardDescription className="text-base">
-                Explore the recruitment agency management interface
+                {/* Explore the recruitment agency management interface */}
+                Experience the platform from a recruitment agency&apos;s
+                perspective
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -99,15 +101,6 @@ export default function FrontendOverviewPage() {
               </Button>
             </CardContent>
           </Card>
-        </div>
-
-        <div className="mt-8 text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-amber-50 border border-amber-200 rounded-lg">
-            <div className="w-2 h-2 bg-amber-400 rounded-full mr-2"></div>
-            <span className="text-sm text-amber-800">
-              Demo Mode: All data is simulated for demonstration purposes
-            </span>
-          </div>
         </div>
       </div>
     </main>

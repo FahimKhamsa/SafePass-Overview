@@ -10,11 +10,20 @@ import {
   LifeBuoy,
   Menu,
   ShieldCheck,
+  Settings,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
 // Navigation items for the sidebar
@@ -24,6 +33,7 @@ const navItems = [
   { href: "/w/applications", label: "My Applications", icon: FileText },
   { href: "/w/grievances", label: "My Grievances", icon: Flag },
   { href: "/w/support", label: "Help & Support", icon: LifeBuoy },
+  { href: "/w/settings", label: "Settings", icon: Settings },
 ];
 
 export default function WorkerPortalLayout({
@@ -94,10 +104,32 @@ export default function WorkerPortalLayout({
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1" /> {/* Spacer */}
-          <Avatar>
-            <AvatarImage src="https://i.pravatar.cc/150?u=worker" />
-            <AvatarFallback>WK</AvatarFallback>
-          </Avatar>
+          {/* User Profile Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" size="icon" className="rounded-full">
+                <Avatar>
+                  <AvatarImage src="https://i.pravatar.cc/150?u=worker" />
+                  <AvatarFallback>WK</AvatarFallback>
+                </Avatar>
+                <span className="sr-only">Toggle user menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Worker Profile</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/w/settings">Settings</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/w/support">Support</Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/frontend-overview">Logout</Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </header>
         <main className="flex-1 p-4 lg:p-6 bg-white">{children}</main>
       </div>

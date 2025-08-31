@@ -8,16 +8,16 @@ export default function LandingPage() {
   return (
     <main className="flex flex-col min-h-screen text-dark-jungle-green">
       {/* Header (No change) */}
-      <header className="fixed top-0 left-0 w-full flex justify-between items-center p-4 px-4 md:px-8 z-10 bg-white/80 backdrop-blur-sm">
+      <header className="fixed top-0 left-0 w-full flex justify-between items-center p-4 px-4 md:px-8 z-10 bg-white/60 backdrop-blur-sm">
         <Link href="/" className="text-2xl font-bold text-dark-jungle-green">
           SafePass
         </Link>
         <div className="flex items-center gap-4">
           <Button variant="ghost" asChild>
-            <Link href="/login">Log In</Link>
+            <Link href="/frontend-overview">Log In</Link>
           </Button>
           <Button className="bg-viridian-green hover:bg-sage-green" asChild>
-            <Link href="/register">Register Agency</Link>
+            <Link href="/frontend-overview">Register Agency</Link>
           </Button>
         </div>
       </header>
@@ -26,7 +26,7 @@ export default function LandingPage() {
       <section className="relative flex min-h-screen items-center py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full">
           {/* Left Column: Text Content */}
-          <div className="text-center md:text-left z-10">
+          <div className="text-center md:text-left -z-1">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
               Ethical Recruitment, Verified Talent.
             </h1>
@@ -41,7 +41,7 @@ export default function LandingPage() {
                 className="bg-viridian-green hover:bg-sage-green"
                 asChild
               >
-                <Link href="/register">
+                <Link href="/frontend-overview">
                   Get Started <MoveRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
@@ -69,24 +69,24 @@ export default function LandingPage() {
             A foundation of trust, transparency, and technology.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 text-left">
-            <div className="p-6 border rounded-lg">
-              <ShieldCheck className="w-10 h-10 text-viridian-green mb-4" />
+            <div className="p-6 border rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-viridian-green/20 hover:border-viridian-green/30 hover:-translate-y-1 cursor-pointer group">
+              <ShieldCheck className="w-10 h-10 text-viridian-green mb-4 transition-transform duration-300 group-hover:scale-110" />
               <h3 className="font-semibold text-lg">Immutable Contracts</h3>
               <p className="mt-2 text-slate-600">
                 Smart contracts prevent fraud and substitution, ensuring the
                 terms you agree to are the terms you get.
               </p>
             </div>
-            <div className="p-6 border rounded-lg">
-              <Users className="w-10 h-10 text-viridian-green mb-4" />
+            <div className="p-6 border rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-viridian-green/20 hover:border-viridian-green/30 hover:-translate-y-1 cursor-pointer group">
+              <Users className="w-10 h-10 text-viridian-green mb-4 transition-transform duration-300 group-hover:scale-110" />
               <h3 className="font-semibold text-lg">Verified Credentials</h3>
               <p className="mt-2 text-slate-600">
                 Workers control their own verifiable digital identity,
                 streamlining the hiring process for employers and agencies.
               </p>
             </div>
-            <div className="p-6 border rounded-lg">
-              <FileText className="w-10 h-10 text-viridian-green mb-4" />
+            <div className="p-6 border rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-viridian-green/20 hover:border-viridian-green/30 hover:-translate-y-1 cursor-pointer group">
+              <FileText className="w-10 h-10 text-viridian-green mb-4 transition-transform duration-300 group-hover:scale-110" />
               <h3 className="font-semibold text-lg">Transparent Reputation</h3>
               <p className="mt-2 text-slate-600">
                 Our on-chain Trust Score incentivizes ethical behavior, making
@@ -101,17 +101,24 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-3xl font-bold">A Simple, Secure Process</h2>
           <div className="mt-12 flex flex-col md:flex-row justify-center items-center gap-8">
-            <p className="p-6 border-2 border-dashed rounded-full h-40 w-40 flex items-center text-center">
-              1. Workers create a secure digital wallet.
-            </p>
+            <div className="p-6 border-2 border-dashed border-viridian-green rounded-2xl w-64 h-40 flex items-center justify-center text-center bg-white/50">
+              <p className="font-medium text-dark-jungle-green">
+                1. Workers create a secure digital wallet.
+              </p>
+            </div>
             <p className="text-2xl text-sage-green">→</p>
-            <p className="p-6 border-2 border-dashed rounded-full h-40 w-40 flex items-center text-center">
-              2. Agencies & Workers connect and sign immutable smart contracts.
-            </p>
+            <div className="p-6 border-2 border-dashed border-viridian-green rounded-2xl w-64 h-40 flex items-center justify-center text-center bg-white/50">
+              <p className="font-medium text-dark-jungle-green">
+                2. Agencies & Workers connect and sign immutable smart
+                contracts.
+              </p>
+            </div>
             <p className="text-2xl text-sage-green">→</p>
-            <p className="p-6 border-2 border-dashed rounded-full h-40 w-40 flex items-center text-center">
-              3. Employers hire pre-verified talent with confidence.
-            </p>
+            <div className="p-6 border-2 border-dashed border-viridian-green rounded-2xl w-64 h-40 flex items-center justify-center text-center bg-white/50">
+              <p className="font-medium text-dark-jungle-green">
+                3. Employers hire pre-verified talent with confidence.
+              </p>
+            </div>
           </div>
         </div>
       </section>

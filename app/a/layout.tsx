@@ -8,6 +8,7 @@ import {
   Menu,
   Settings,
   ShieldCheck,
+  LifeBuoy,
   Users,
 } from "lucide-react";
 
@@ -29,6 +30,7 @@ const navItems = [
   { href: "/a/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/a/jobs", label: "Job Listings", icon: Briefcase },
   { href: "/a/placements", label: "Placements", icon: Users },
+  { href: "/a/support", label: "Help & Support", icon: LifeBuoy },
   { href: "/a/settings/profile", label: "Settings", icon: Settings },
 ];
 
@@ -118,11 +120,15 @@ export default function AgencyDashboardLayout({
               <DropdownMenuLabel>Global Recruiters Ltd.</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/settings/profile">Settings</Link>
+                <Link href="/a/settings/profile">Settings</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/a/support">Support</Link>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/frontend-overview">Logout</Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

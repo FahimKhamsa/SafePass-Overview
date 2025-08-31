@@ -41,7 +41,7 @@ export default function HelpSupportPage() {
         </div>
 
         {/* Contact Support Section */}
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-1 space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>Need More Help?</CardTitle>
