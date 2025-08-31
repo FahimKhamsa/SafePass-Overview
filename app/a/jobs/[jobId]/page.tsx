@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -51,9 +51,17 @@ const columns = {
 export default function CandidatePipelinePage({
   params,
 }: {
-  params: { jobId: string };
+  params: Promise<{ jobId: string }>;
 }) {
   const [candidateState, setCandidateState] = useState(initialCandidates);
+  const [jobId, setJobId] = useState<string>("");
+
+  // Handle async params
+  useEffect(() => {
+    params.then(({ jobId }) => {
+      setJobId(jobId);
+    });
+  }, [params]);
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
@@ -83,7 +91,7 @@ export default function CandidatePipelinePage({
       <h1 className="text-3xl font-bold text-dark-jungle-green">
         Candidate Pipeline
       </h1>
-      <p className="text-slate-500">Job ID: {params.jobId}</p>
+      <p className="text-slate-500">Job ID: {jobId}</p>
 
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 items-start">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
@@ -27,17 +27,25 @@ const candidate = {
 export default function SmartContractIssuancePage({
   params,
 }: {
-  params: { candidateId: string };
+  params: Promise<{ candidateId: string }>;
 }) {
   const [date, setDate] = useState<Date>();
   const [isLoading, setIsLoading] = useState(false);
+  const [candidateId, setCandidateId] = useState<string>("");
+
+  // Handle async params
+  useEffect(() => {
+    params.then(({ candidateId }) => {
+      setCandidateId(candidateId);
+    });
+  }, [params]);
 
   const handleSendContract = async () => {
     setIsLoading(true);
     // TODO: Validate form and send API request to issue contract
     console.log(
       "Issuing contract for candidate:",
-      params.candidateId,
+      candidateId,
       "with start date:",
       date
     );

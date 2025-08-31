@@ -13,12 +13,13 @@ import {
   Star,
 } from "lucide-react";
 
-export default function JobDetailsPage({
+export default async function JobDetailsPage({
   params,
 }: {
-  params: { jobId: string };
+  params: Promise<{ jobId: string }>;
 }) {
-  const job = getJobById(params.jobId);
+  const { jobId } = await params;
+  const job = getJobById(jobId);
 
   // If no job is found for the given ID, show the 404 page
   if (!job) {

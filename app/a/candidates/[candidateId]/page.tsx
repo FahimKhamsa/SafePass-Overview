@@ -23,7 +23,7 @@ const candidate = {
 export default function CandidateDetailsPage({
   params,
 }: {
-  params: { candidateId: string };
+  params: Promise<{ candidateId: string }>;
 }) {
   return (
     <div className="p-4 md:p-8">

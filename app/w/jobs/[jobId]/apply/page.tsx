@@ -17,12 +17,13 @@ const requiredCredentials = [
   { id: "cred_welder", name: "Certified Welder Certificate" },
 ];
 
-export default function ApplicationSubmissionPage({
+export default async function ApplicationSubmissionPage({
   params,
 }: {
-  params: { jobId: string };
+  params: Promise<{ jobId: string }>;
 }) {
-  const job = getJobById(params.jobId);
+  const { jobId } = await params;
+  const job = getJobById(jobId);
 
   if (!job) {
     notFound();

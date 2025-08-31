@@ -21,12 +21,13 @@ const StarRating = ({ rating }: { rating: number }) => (
   </div>
 );
 
-export default function AgencyProfilePage({
+export default async function AgencyProfilePage({
   params,
 }: {
-  params: { agencyId: string };
+  params: Promise<{ agencyId: string }>;
 }) {
-  const agency = getAgencyById(params.agencyId);
+  const { agencyId } = await params;
+  const agency = getAgencyById(agencyId);
 
   if (!agency) {
     notFound();

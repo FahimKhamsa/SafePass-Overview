@@ -9,12 +9,13 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 
-export default function ContractReviewPage({
+export default async function ContractReviewPage({
   params,
 }: {
-  params: { applicationId: string };
+  params: Promise<{ applicationId: string }>;
 }) {
-  const application = getApplicationById(params.applicationId);
+  const { applicationId } = await params;
+  const application = getApplicationById(applicationId);
 
   if (!application) {
     notFound();
