@@ -25,23 +25,27 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
+import { LanguageToggle } from "@/components/shared/LanguageToggle";
 
 // Navigation items for the sidebar
-const navItems = [
-  { href: "/w/dashboard", label: "Dashboard", icon: Home },
-  { href: "/w/jobs", label: "Find Jobs", icon: Briefcase },
-  { href: "/w/applications", label: "My Applications", icon: FileText },
-  { href: "/w/grievances", label: "My Grievances", icon: Flag },
-  { href: "/w/support", label: "Help & Support", icon: LifeBuoy },
-  { href: "/w/settings", label: "Settings", icon: Settings },
+const getNavItems = (t: (key: string) => string) => [
+  { href: "/w/dashboard", label: t("navigation.dashboard"), icon: Home },
+  { href: "/w/jobs", label: t("navigation.findJobs"), icon: Briefcase },
+  {
+    href: "/w/applications",
+    label: t("navigation.myApplications"),
+    icon: FileText,
+  },
+  { href: "/w/grievances", label: t("navigation.myGrievances"), icon: Flag },
+  { href: "/w/support", label: t("navigation.helpSupport"), icon: LifeBuoy },
+  { href: "/w/settings", label: t("navigation.settings"), icon: Settings },
 ];
 
-export default function WorkerPortalLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function WorkerPortalContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const { t } = useLanguage();
+  const navItems = getNavItems(t);
 
   const NavLink = ({ href, label, icon: Icon }: (typeof navItems)[0]) => (
     <Link
@@ -96,7 +100,7 @@ export default function WorkerPortalLayout({
                 className="shrink-0 md:hidden"
               >
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle navigation menu</span>
+                <span className="sr-only">{t("header.toggleMenu")}</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col p-0">
@@ -104,6 +108,8 @@ export default function WorkerPortalLayout({
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1" /> {/* Spacer */}
+          {/* Language Toggle */}
+          <LanguageToggle />
           {/* User Profile Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -112,21 +118,21 @@ export default function WorkerPortalLayout({
                   <AvatarImage src="https://i.pravatar.cc/150?u=worker" />
                   <AvatarFallback>WK</AvatarFallback>
                 </Avatar>
-                <span className="sr-only">Toggle user menu</span>
+                <span className="sr-only">{t("header.toggleUser")}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Worker Profile</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("header.workerProfile")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/w/settings">Settings</Link>
+                <Link href="/w/settings">{t("navigation.settings")}</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/w/support">Support</Link>
+                <Link href="/w/support">{t("header.support")}</Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/frontend-overview">Logout</Link>
+                <Link href="/frontend-overview">{t("header.logout")}</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -134,5 +140,17 @@ export default function WorkerPortalLayout({
         <main className="flex-1 p-4 lg:p-6 bg-white">{children}</main>
       </div>
     </div>
+  );
+}
+
+export default function WorkerPortalLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <LanguageProvider>
+      <WorkerPortalContent>{children}</WorkerPortalContent>
+    </LanguageProvider>
   );
 }

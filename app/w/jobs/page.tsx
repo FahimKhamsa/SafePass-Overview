@@ -12,8 +12,10 @@ import {
 import { Search } from "lucide-react";
 import { jobListings, Job } from "@/lib/dummy-data";
 import { JobCard } from "@/components/worker-portal/job-card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function JobFeedPage() {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("all");
 
@@ -41,11 +43,9 @@ export default function JobFeedPage() {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-dark-jungle-green">
-          Find Your Next Job
+          {t("jobs.findYourNextJob")}
         </h1>
-        <p className="text-slate-500">
-          Browse verified opportunities from trusted recruitment agencies.
-        </p>
+        <p className="text-slate-500">{t("jobs.browseOpportunities")}</p>
       </div>
 
       {/* Filter and Search Bar */}
@@ -53,7 +53,7 @@ export default function JobFeedPage() {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
           <Input
-            placeholder="Search by job title or company..."
+            placeholder={t("jobs.searchPlaceholder")}
             className="pl-10"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -61,10 +61,10 @@ export default function JobFeedPage() {
         </div>
         <Select value={selectedCountry} onValueChange={setSelectedCountry}>
           <SelectTrigger className="w-full md:w-[180px]">
-            <SelectValue placeholder="Filter by country" />
+            <SelectValue placeholder={t("jobs.filterByCountry")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Countries</SelectItem>
+            <SelectItem value="all">{t("jobs.allCountries")}</SelectItem>
             {countries.map((country) => (
               <SelectItem key={country} value={country}>
                 {country}
@@ -83,10 +83,8 @@ export default function JobFeedPage() {
         </div>
       ) : (
         <div className="text-center py-16">
-          <h3 className="text-xl font-semibold">No Jobs Found</h3>
-          <p className="text-slate-500 mt-2">
-            Try adjusting your search or filters.
-          </p>
+          <h3 className="text-xl font-semibold">{t("jobs.noJobsFound")}</h3>
+          <p className="text-slate-500 mt-2">{t("jobs.tryAdjusting")}</p>
         </div>
       )}
     </div>

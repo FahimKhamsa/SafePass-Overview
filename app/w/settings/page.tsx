@@ -19,6 +19,7 @@ import {
   FileText,
   Camera,
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Dummy worker data
 const workerData = {
@@ -43,6 +44,7 @@ const credentials = [
 ];
 
 export default function WorkerSettingsPage() {
+  const { t } = useLanguage();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(workerData);
 
@@ -60,17 +62,21 @@ export default function WorkerSettingsPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-dark-jungle-green">Settings</h1>
-        <p className="text-slate-500">
-          Manage your personal information and account settings.
-        </p>
+        <h1 className="text-3xl font-bold text-dark-jungle-green">
+          {t("settings.profileSettings")}
+        </h1>
+        <p className="text-slate-500">{t("settings.manageInfo")}</p>
       </div>
 
       <Tabs defaultValue="profile" className="space-y-6">
         <TabsList>
-          <TabsTrigger value="profile">Profile</TabsTrigger>
-          <TabsTrigger value="credentials">Credentials</TabsTrigger>
-          <TabsTrigger value="privacy">Privacy & Security</TabsTrigger>
+          <TabsTrigger value="profile">{t("settings.profile")}</TabsTrigger>
+          <TabsTrigger value="credentials">
+            {t("settings.credentials")}
+          </TabsTrigger>
+          <TabsTrigger value="privacy">
+            {t("settings.privacySecurity")}
+          </TabsTrigger>
         </TabsList>
 
         {/* Profile Tab */}
@@ -78,17 +84,19 @@ export default function WorkerSettingsPage() {
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle>Personal Information</CardTitle>
+                <CardTitle>{t("settings.personalInformation")}</CardTitle>
                 {!isEditing ? (
                   <Button onClick={() => setIsEditing(true)}>
-                    Edit Profile
+                    {t("settings.editProfile")}
                   </Button>
                 ) : (
                   <div className="flex gap-2">
                     <Button variant="outline" onClick={handleCancel}>
-                      Cancel
+                      {t("settings.cancel")}
                     </Button>
-                    <Button onClick={handleSave}>Save Changes</Button>
+                    <Button onClick={handleSave}>
+                      {t("settings.saveChanges")}
+                    </Button>
                   </div>
                 )}
               </div>
@@ -108,7 +116,7 @@ export default function WorkerSettingsPage() {
                 {isEditing && (
                   <Button variant="outline" size="sm">
                     <Camera className="h-4 w-4 mr-2" />
-                    Change Photo
+                    {t("settings.changePhoto")}
                   </Button>
                 )}
               </div>
@@ -116,7 +124,7 @@ export default function WorkerSettingsPage() {
               {/* Form Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label htmlFor="name">{t("settings.fullName")}</Label>
                   <div className="relative">
                     <User className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
                     <Input
@@ -132,7 +140,7 @@ export default function WorkerSettingsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
+                  <Label htmlFor="email">{t("settings.emailAddress")}</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
                     <Input
@@ -149,7 +157,7 @@ export default function WorkerSettingsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
+                  <Label htmlFor="phone">{t("settings.phoneNumber")}</Label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
                     <Input
@@ -165,7 +173,7 @@ export default function WorkerSettingsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="dob">Date of Birth</Label>
+                  <Label htmlFor="dob">{t("settings.dateOfBirth")}</Label>
                   <div className="relative">
                     <Calendar className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
                     <Input
@@ -185,7 +193,7 @@ export default function WorkerSettingsPage() {
                 </div>
 
                 <div className="space-y-2 md:col-span-2">
-                  <Label htmlFor="address">Address</Label>
+                  <Label htmlFor="address">{t("settings.address")}</Label>
                   <div className="relative">
                     <MapPin className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
                     <Input
@@ -201,7 +209,7 @@ export default function WorkerSettingsPage() {
                 </div>
 
                 <div className="space-y-2 md:col-span-2">
-                  <Label htmlFor="bio">Bio</Label>
+                  <Label htmlFor="bio">{t("settings.bio")}</Label>
                   <Textarea
                     id="bio"
                     value={formData.bio}
@@ -216,7 +224,7 @@ export default function WorkerSettingsPage() {
 
               {/* Skills Section */}
               <div className="space-y-2">
-                <Label>Skills</Label>
+                <Label>{t("settings.skills")}</Label>
                 <div className="flex flex-wrap gap-2">
                   {formData.skills.map((skill, index) => (
                     <Badge key={index} variant="secondary">
@@ -233,7 +241,7 @@ export default function WorkerSettingsPage() {
         <TabsContent value="credentials" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Verified Credentials</CardTitle>
+              <CardTitle>{t("settings.verifiedCredentials")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -247,7 +255,7 @@ export default function WorkerSettingsPage() {
                       <div>
                         <p className="font-medium">{credential.name}</p>
                         <p className="text-sm text-slate-500">
-                          Verified on{" "}
+                          {t("settings.verifiedOn")}{" "}
                           {new Date(credential.date).toLocaleDateString()}
                         </p>
                       </div>
@@ -267,37 +275,39 @@ export default function WorkerSettingsPage() {
         <TabsContent value="privacy" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Privacy & Security Settings</CardTitle>
+              <CardTitle>{t("settings.privacySecuritySettings")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium">Profile Visibility</p>
+                  <p className="font-medium">
+                    {t("settings.profileVisibility")}
+                  </p>
                   <p className="text-sm text-slate-500">
-                    Control who can see your profile information
+                    {t("settings.profileVisibilityDesc")}
                   </p>
                 </div>
-                <Button variant="outline">Manage</Button>
+                <Button variant="outline">{t("settings.manage")}</Button>
               </div>
 
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium">Two-Factor Authentication</p>
+                  <p className="font-medium">{t("settings.twoFactorAuth")}</p>
                   <p className="text-sm text-slate-500">
-                    Add an extra layer of security to your account
+                    {t("settings.twoFactorAuthDesc")}
                   </p>
                 </div>
-                <Button variant="outline">Enable</Button>
+                <Button variant="outline">{t("settings.enable")}</Button>
               </div>
 
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium">Data Export</p>
+                  <p className="font-medium">{t("settings.dataExport")}</p>
                   <p className="text-sm text-slate-500">
-                    Download a copy of your personal data
+                    {t("settings.dataExportDesc")}
                   </p>
                 </div>
-                <Button variant="outline">Export</Button>
+                <Button variant="outline">{t("settings.export")}</Button>
               </div>
             </CardContent>
           </Card>
